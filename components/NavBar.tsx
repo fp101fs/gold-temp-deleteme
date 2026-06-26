@@ -12,7 +12,7 @@ export default function NavBar() {
           </span>
         </div>
 
-        {/* Links — hidden on small screens, simple on larger */}
+        {/* Links — hidden on small screens */}
         <div className="hidden items-center gap-8 text-sm font-medium text-gold-200/70 sm:flex">
           <a href="#features" className="transition-colors hover:text-gold-300">
             Features
@@ -22,13 +22,21 @@ export default function NavBar() {
           </a>
         </div>
 
-        {/* Mobile indicator */}
-        <button
-          type="button"
-          className="rounded-lg border border-gold-500/20 px-4 py-1.5 text-xs font-medium text-gold-300 transition-colors hover:bg-gold-500/10 sm:hidden"
-        >
-          Menu
-        </button>
+        {/* Right side: Sign In + Mobile menu */}
+        <div className="flex items-center gap-3">
+          <a
+            href="#"
+            className="rounded-lg border border-gold-500/20 px-4 py-1.5 text-xs font-medium text-gold-300 transition-colors hover:bg-gold-500/10"
+          >
+            Sign In
+          </a>
+          <button
+            type="button"
+            className="rounded-lg border border-gold-500/20 px-3 py-1.5 text-xs font-medium text-gold-400 transition-colors hover:bg-gold-500/10 sm:hidden"
+          >
+            Menu
+          </button>
+        </div>
       </GlassCard>
     </nav>
   );
