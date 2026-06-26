@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Inter font ── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap");
+
+/* ── Glassmorphic card layer ── */
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-gold-500/20 shadow-xl shadow-gold-500/5;
+  }
+
+  .glass-strong {
+    @apply backdrop-blur-2xl bg-white/[0.08] border border-gold-400/30 shadow-2xl shadow-gold-400/10;
+  }
+
+  .glass-glow {
+    @apply backdrop-blur-3xl bg-gradient-to-br from-gold-500/10 via-transparent to-gold-300/5 border border-gold-400/20 shadow-2xl shadow-gold-400/20;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-gold-300 via-gold-500 to-gold-400 bg-clip-text text-transparent;
+  }
+}
+
+/* ── Smooth scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Subtle animated background ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(223, 191, 51, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(231, 207, 102, 0.04) 0%, transparent 70%);
+  animation: ambientShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes ambientShift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(2%, 1%) scale(1.05); }
+  100% { transform: translate(-1%, -1%) scale(1); }
+}
