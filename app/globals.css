@@ -29,21 +29,149 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ── Subtle animated background ── */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(223, 191, 51, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(231, 207, 102, 0.04) 0%, transparent 70%);
-  animation: ambientShift 20s ease-in-out infinite alternate;
+/* ── Floating particle animation ── */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-30px) translateX(10px);
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 1;
+  }
 }
 
-@keyframes ambientShift {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(2%, 1%) scale(1.05); }
-  100% { transform: translate(-1%, -1%) scale(1); }
+.animate-float {
+  animation: float 10s ease-in-out infinite;
 }
+
+/* ── Scroll-triggered reveal ── */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealScale {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Card hover glow ── */
+.glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 60px rgba(212, 175, 55, 0.15),
+    0 0 0 1px rgba(212, 175, 55, 0.3) inset;
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+/* ── Shimmer text effect ── */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0) 0%,
+    rgba(212, 175, 55, 0.8) 50%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ── Pulse ring animation ── */
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(212, 175, 55, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+.pulse-ring {
+  animation: pulseRing 2.5s ease-out infinite;
+}
+
+/* ── Gradient border animation ── */
+@keyframes rotateGradient {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+@supports (background: paint(something)) {
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+}
+
+/* ── Subtle animated background removed — now handled by ParallaxBackground ── */
