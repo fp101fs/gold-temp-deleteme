@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ParallaxBackground from "@/components/ParallaxBackground";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-gradient-to-br from-[#0f0b05] via-[#1a1208] to-[#0f0b05] text-gold-100 antialiased">
+        <ParallaxBackground />
         {children}
       </body>
     </html>
